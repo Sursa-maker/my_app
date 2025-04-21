@@ -1,0 +1,70 @@
+import React,{useState} from 'react'
+
+export default function TextForm(props) {
+
+    const handleSentenceCaseClick = () => {
+        console.log("Sentence case was clicked: " + text);
+        let newText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+        setText(newText);
+        props.showAlert("Converted to sentence case", "success")
+    };
+    const handleUpClick = ()=> {
+        console.log("upper case was clicked"+ text );
+        let newText = text.toUpperCase();
+        setText(newText); 
+        props.showAlert("Converted uppercase", "success")
+
+        }
+        const handleDownClick = ()=> {
+            console.log("lower case was clicked"+ text );
+            let newText = text.toLowerCase();
+            setText(newText);
+            props.showAlert("Converted to lowercase", "success")
+ 
+        }
+        const hannleCopyClick = ()=> {
+            console.log("copy was clicked"+ text );
+            navigator.clipboard.writeText(text);
+            props.showAlert("copy to clipboard", "success")
+
+        }
+        const handleClearClick = () => {
+            let newText = '';
+            setText(newText)
+            props.showAlert("Text cleard", "success")
+
+        }
+    const handleOnChange = (event)=> {
+        console.log("on change")
+        setText(event.target.value)
+    }
+
+
+    const[text, setText] = useState('')
+    return (
+        <div className="container" style={{color: props.mode ==='dark'? 'white':'#042743'}} >
+            <h1>{props.heading} </h1>
+            <div className="mb-3">
+                <textarea className="form-control my-3" placeholder='Enter text here' value= {text} onChange={handleOnChange} style={{backgroundColor:props.mode==='dark'?'grey':'white' , color:props.mode==='dark'?'white':'#042743'}} id="myBox" rows="8" ></textarea>
+                {console.log(props)}
+                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    
+                    <button id='one' className="btn btn-primary" onClick={handleSentenceCaseClick}>Convert to sentencecase</button>
+                    <button id='two'className="btn btn-primary" onClick={handleUpClick}>Convert to Uppercase</button>
+                    <button id='three'className="btn btn-primary" onClick={handleDownClick}>Convert to Lowercase</button>
+                    <button id='four'className="btn btn-success" onClick={hannleCopyClick}> Copy to Clipboard </button>
+                    <button id='five' className="btn btn-success" onClick={handleClearClick}>Clear Text</button>
+                </div>
+                <div className="container my-3" style={{color:props.mode==='dark'?'white':'#042743'}}></div>
+                <h2>Your text summary</h2>
+                <p>{text.split(" ").length -1} words and {text.length} characters</p>
+                <p>{0.008 * text.split(" ").length} Minutes read</p>
+                <h2>Preview</h2>
+                <p>{text}</p>
+               
+
+            </div>
+        </div>  
+    )
+}
+
