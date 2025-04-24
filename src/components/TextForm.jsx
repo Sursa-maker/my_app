@@ -48,18 +48,18 @@ export default function TextForm(props) {
                 {console.log(props)}
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                     
-                    <button id='one' className="btn btn-primary mx-1 my-1" onClick={handleSentenceCaseClick}>Convert to sentencecase</button>
-                    <button id='two'className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
-                    <button id='three'className="btn btn-primary mx-1 my-1" onClick={handleDownClick}>Convert to Lowercase</button>
-                    <button id='four'className="btn btn-success mx-1 my-1" onClick={hannleCopyClick}> Copy to Clipboard </button>
-                    <button id='five' className="btn btn-success mx-1 my-1" onClick={handleClearClick}>Clear Text</button>
+                    <button id='one' disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleSentenceCaseClick}>Convert to sentencecase</button>
+                    <button id='two' disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
+                    <button id='three' disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleDownClick}>Convert to Lowercase</button>
+                    <button id='four' disabled={text.length===0} className="btn btn-success mx-1 my-1" onClick={hannleCopyClick}> Copy to Clipboard </button>
+                    <button id='five' disabled={text.length===0} className="btn btn-success mx-1 my-1" onClick={handleClearClick}>Clear Text</button>
                 </div>
                 <div className="container my-3" style={{color:props.mode==='dark'?'white':'#042743'}}></div>
                 <h2>Your text summary</h2>
                 <p>{text.split(" ").filter((element)=>{return element.length!=0}).length} words and {text.length} characters</p>
-                <p>{0.008 * text.split(" ").length} Minutes read</p>
+                <p>{0.008 * text.split(" ").filter((element)=>{return element.length!=0}).length} Minutes read</p>
                 <h2>Preview</h2>
-                <p>{text}</p>
+                <p>{text.length>0?text:"Nothing to priview!"}</p>
                
 
             </div>
